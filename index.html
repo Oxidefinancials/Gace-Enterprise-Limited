@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gace Enterprises Limited | Empowering Nigerian Farmers & AgriInvestors</title>
+    <meta name="description" content="Gace Enterprises Limited bridges the gap between Nigerian smallholder farmers and modern agriculture — providing training, financing, market access, and investment opportunities.">
+    <meta name="keywords" content="Nigerian agriculture, farmer financing Nigeria, agri-tech Nigeria, food security Nigeria, farm investment Nigeria, smallholder farmers">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gace Enterprises Limited">
+    <meta property="og:description" content="Empowering Nigerian farmers with technology, finance, and markets.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200">
+    <meta property="og:type" content="website">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Gace Enterprises Limited",
+      "description": "AgriTech company empowering Nigerian farmers",
+      "url": "https://www.gaceenterprise.com.ng",
+      "address": { "@type": "PostalAddress", "addressCountry": "NG" },
+      "sameAs": ["https://facebook.com/gaceenterprise", "https://twitter.com/gaceenterprise"]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CDNs -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+    
+    <!-- Tailwind CSS (via CDN for standalone requirement) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1B5E20',
+                        secondary: '#F9A825',
+                        accent: '#5D4037',
+                        bgWarm: '#FAFAF7',
+                        charcoal: '#212121',
+                    },
+                    fontFamily: {
+                        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAF7;
+            color: #212121;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #F9A825 !important;
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #F9A825;
+            z-index: 1000;
+            width: 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #F9A825;
+            color: #1B5E20;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #1B5E20;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #1B5E20;
+            transform: translateX(100%);
+            transition: transform 0.5s;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            gap: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Nav shadow on scroll */
+        header.scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        header.scrolled .nav-link {
+            color: #212121;
+        }
+
+        header.scrolled .logo-icon {
+            border-color: #1B5E20;
+        }
+
+        header.scrolled .logo-icon svg {
+            fill: #1B5E20;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="flex items-center space-x-4">
+            <div class="w-16 h-16 border-4 border-white flex items-center justify-center">
+                <svg viewBox="0 0 100 100" class="w-10 h-10 fill-white"><path d="M68.5 28.5C65.3 22.8 58.6 19.3 51 19.3C37.2 19.3 26 30.5 26 44.3C26 58.1 37.2 69.3 51 69.3C61.4 69.3 70.3 62.9 74 54V60H84V44H51V54H74C72.5 59.8 67.2 64.3 61 64.3C52.7 64.3 46 57.6 46 49.3C46 41 52.7 34.3 61 34.3C66 34.3 70.4 36.6 73.2 40.3L81.5 32C78.4 28.1 73.8 25.3 68.5 24V28.5Z"/></svg>
+            </div>
+            <h1 class="text-white text-6xl font-extrabold">GACE</h1>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6" id="main-header">
+        <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#home" class="flex items-center space-x-3 group">
+                <!-- SVG Fallback matching the uploaded logo -->
+                <div class="w-12 h-12 border-2 border-white flex items-center justify-center transition-all duration-300 logo-icon group-hover:border-secondary">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8 fill-white transition-all duration-300 group-hover:fill-secondary">
+                        <path d="M68.5 28.5C65.3 22.8 58.6 19.3 51 19.3C37.2 19.3 26 30.5 26 44.3C26 58.1 37.2 69.3 51 69.3C61.4 69.3 70.3 62.9 74 54V60H84V44H51V54H74C72.5 59.8 67.2 64.3 61 64.3C52.7 64.3 46 57.6 46 49.3C46 41 52.7 34.3 61 34.3C66 34.3 70.4 36.6 73.2 40.3L81.5 32C78.4 28.1 73.8 25.3 68.5 24V28.5Z"/>
+                    </svg>
+                </div>
+                <!-- Official Logo Image (Upload as logo.png to enable) -->
+                <!-- <img src="logo.png" alt="GACE Logo" class="h-12 hidden"> -->
+                <div class="flex flex-col">
+                    <span class="text-3xl font-extrabold tracking-tight logo-text text-white transition-colors duration-300">GACE</span>
+                    <span class="text-[10px] uppercase tracking-wider text-secondary font-bold">Enterprises Limited</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Home</a>
+                <a href="#about" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">About</a>
+                <a href="#services" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Services</a>
+                <a href="#farmers" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Farmers</a>
+                <a href="#investors" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Investors</a>
+                <a href="#impact" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Impact</a>
+                <a href="#contact" class="nav-link text-white font-medium hover:text-secondary transition-colors duration-300 relative">Contact</a>
+                <a href="#contact" class="bg-secondary text-primary px-6 py-2.5 rounded-full font-bold hover:brightness-110 transition-all">Get Started</a>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="lg:hidden text-white p-2" id="menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="menu-icon"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu lg:hidden" id="mobile-menu">
+        <a href="#home" class="hover:text-secondary click-link">Home</a>
+        <a href="#about" class="hover:text-secondary click-link">About</a>
+        <a href="#services" class="hover:text-secondary click-link">Services</a>
+        <a href="#farmers" class="hover:text-secondary click-link">Farmers</a>
+        <a href="#investors" class="hover:text-secondary click-link">Investors</a>
+        <a href="#impact" class="hover:text-secondary click-link">Impact</a>
+        <a href="#contact" class="hover:text-secondary click-link">Contact</a>
+        <a href="#contact" class="bg-secondary text-primary px-10 py-4 rounded-full font-bold click-link">Get Started</a>
+    </div>
+
+    <!-- Section 2: Hero Section -->
+    <section id="home" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600" alt="Nigerian Farmland" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-[rgba(27,94,32,0.85)] to-[rgba(27,94,32,0.65)]"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight" data-aos="fade-up">
+                Feeding Nigeria Starts With Empowering Her Farmers
+            </h1>
+            <p class="text-lg md:text-xl text-gray-100 mb-10 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                Gace Enterprises Limited connects local farmers to modern technology, financing, and global markets — ending food insecurity one harvest at a time.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#farmers" class="bg-secondary text-primary px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all w-full sm:w-auto">Join as a Farmer</a>
+                <a href="#investors" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-primary transition-all w-full sm:w-auto">Invest in Agriculture</a>
+            </div>
+        </div>
+
+        <!-- Floating Badge Stats -->
+        <div class="absolute bottom-20 left-0 w-full hidden md:flex justify-center space-x-8 px-6 z-10">
+            <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 text-white animate-bounce" style="animation-duration: 3s;">
+                <span class="block text-2xl font-bold text-secondary">2,400+</span>
+                <span class="text-xs uppercase tracking-widest font-semibold">Farmers Reached</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 text-white animate-bounce" style="animation-duration: 4s;">
+                <span class="block text-2xl font-bold text-secondary">₦180M+</span>
+                <span class="text-xs uppercase tracking-widest font-semibold">Financing Facilitated</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 text-white animate-bounce" style="animation-duration: 3.5s;">
+                <span class="block text-2xl font-bold text-secondary">34</span>
+                <span class="text-xs uppercase tracking-widest font-semibold">Local Govts Covered</span>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer" onclick="document.getElementById('about').scrollIntoView()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 13 5 5 5-5"/><path d="m7 6 5 5 5-5"/></svg>
+        </div>
+    </section>
+
+    <!-- Section 3: The Problem -->
+    <section id="about" class="py-24 bg-[#F1F8E9]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">Nigeria's Food Crisis Is Solvable</h2>
+                <div class="w-20 h-1.5 bg-secondary mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-10 rounded-2xl border-l-[6px] border-primary shadow-sm hover:shadow-xl transition-all" data-aos="fade-up">
+                    <span class="text-5xl mb-6 block">🌾</span>
+                    <h3 class="text-2xl font-bold mb-4">Knowledge Gap</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Over 70% of Nigeria's food is produced by smallholder farmers still using traditional methods with no access to modern agricultural science.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-10 rounded-2xl border-l-[6px] border-primary shadow-sm hover:shadow-xl transition-all" data-aos="fade-up" data-aos-delay="100">
+                    <span class="text-5xl mb-6 block">💰</span>
+                    <h3 class="text-2xl font-bold mb-4">Finance Barrier</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Most farmers cannot access formal credit. Without capital, they cannot scale, invest in inputs, or survive a bad season.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-10 rounded-2xl border-l-[6px] border-primary shadow-sm hover:shadow-xl transition-all" data-aos="fade-up" data-aos-delay="200">
+                    <span class="text-5xl mb-6 block">🚧</span>
+                    <h3 class="text-2xl font-bold mb-4">Infrastructure Deficit</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Poor roads, storage, and market linkages mean post-harvest losses cost Nigerian farmers billions every year.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Our Services -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">What Gace Enterprise Does</h2>
+                <p class="text-xl text-gray-500" data-aos="fade-up" data-aos-delay="100">A complete ecosystem built for the Nigerian farmer and the forward-thinking investor</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="group bg-bgWarm p-12 rounded-3xl service-card transition-all" data-aos="zoom-in">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm mb-8 group-hover:bg-primary transition-colors">📚</div>
+                    <h3 class="text-2xl font-bold mb-4">AgriKnowledge Hub</h3>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        Practical training, workshops, and digital resources covering modern farming techniques, soil management, irrigation, and crop science — delivered in local languages.
+                    </p>
+                    <a href="#" class="text-primary font-bold hover:translate-x-2 inline-flex items-center transition-all">Explore Resources <span class="ml-2">→</span></a>
+                </div>
+                <!-- Card 2 -->
+                <div class="group bg-bgWarm p-12 rounded-3xl service-card transition-all" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm mb-8 group-hover:bg-primary transition-colors">💳</div>
+                    <h3 class="text-2xl font-bold mb-4">FarmFinance Access</h3>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        We partner with microfinance institutions, cooperatives, and impact investors to connect farmers with affordable loans, grants, and input financing.
+                    </p>
+                    <a href="#" class="text-primary font-bold hover:translate-x-2 inline-flex items-center transition-all">Apply for Financing <span class="ml-2">→</span></a>
+                </div>
+                <!-- Card 3 -->
+                <div class="group bg-bgWarm p-12 rounded-3xl service-card transition-all" data-aos="zoom-in">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm mb-8 group-hover:bg-primary transition-colors">📈</div>
+                    <h3 class="text-2xl font-bold mb-4">Investor Connect</h3>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        Verified investment opportunities in Nigerian agriculture. Earn competitive returns while funding food security. Full transparency, regular reporting.
+                    </p>
+                    <a href="#" class="text-primary font-bold hover:translate-x-2 inline-flex items-center transition-all">View Opportunities <span class="ml-2">→</span></a>
+                </div>
+                <!-- Card 4 -->
+                <div class="group bg-bgWarm p-12 rounded-3xl service-card transition-all" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm mb-8 group-hover:bg-primary transition-colors">🏪</div>
+                    <h3 class="text-2xl font-bold mb-4">Market Linkage</h3>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        We connect farmers directly to buyers — processors, exporters, supermarkets — eliminating middlemen and ensuring fair prices.
+                    </p>
+                    <a href="#" class="text-primary font-bold hover:translate-x-2 inline-flex items-center transition-all">Find Markets <span class="ml-2">→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Impact Statistics -->
+    <section id="impact" class="py-24 bg-primary text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20" data-aos="fade-up">Our Impact in Numbers</h2>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center mb-16 relative">
+                <!-- Stat 1 -->
+                <div class="relative px-4" data-aos="fade-up">
+                    <span class="text-4xl md:text-6xl font-extrabold text-secondary block mb-2" id="stat1">0</span>
+                    <span class="text-sm md:text-base uppercase tracking-widest opacity-80 font-semibold">Farmers Empowered</span>
+                </div>
+                <!-- Stat 2 -->
+                <div class="relative px-4 border-l border-white/20" data-aos="fade-up" data-aos-delay="100">
+                    <span class="text-4xl md:text-6xl font-extrabold text-secondary block mb-2">₦<span id="stat2">0</span>M+</span>
+                    <span class="text-sm md:text-base uppercase tracking-widest opacity-80 font-semibold">Financing Facilitated</span>
+                </div>
+                <!-- Stat 3 -->
+                <div class="relative px-4 border-l border-white/20" data-aos="fade-up" data-aos-delay="200">
+                    <span class="text-4xl md:text-6xl font-extrabold text-secondary block mb-2" id="stat3">0</span>
+                    <span class="text-sm md:text-base uppercase tracking-widest opacity-80 font-semibold">Local Govt Reached</span>
+                </div>
+                <!-- Stat 4 -->
+                <div class="relative px-4 border-l border-white/20" data-aos="fade-up" data-aos-delay="300">
+                    <span class="text-4xl md:text-6xl font-extrabold text-secondary block mb-2"><span id="stat4">0</span>%</span>
+                    <span class="text-sm md:text-base uppercase tracking-widest opacity-80 font-semibold">Farmer Satisfaction</span>
+                </div>
+            </div>
+
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-2xl md:text-3xl italic text-secondary font-medium">"When farmers thrive, Nigeria thrives. We are just getting started."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: For Farmers -->
+    <section id="farmers" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Built for the Nigerian Farmer</h2>
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                    Whether you farm cassava in Benue, rice in Kebbi, or vegetables in Plateau — Gace Enterprise is your partner. We meet you where you are and take you further.
+                </p>
+                <ul class="space-y-4 mb-10">
+                    <li class="flex items-center text-lg text-gray-700">
+                        <div class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        Free agricultural training and extension services
+                    </li>
+                    <li class="flex items-center text-lg text-gray-700">
+                        <div class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        Access to certified seeds, fertilizers, and inputs
+                    </li>
+                    <li class="flex items-center text-lg text-gray-700">
+                        <div class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        Loan and grant application support
+                    </li>
+                    <li class="flex items-center text-lg text-gray-700">
+                        <div class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        Market connections and fair pricing
+                    </li>
+                    <li class="flex items-center text-lg text-gray-700">
+                        <div class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        Mobile-friendly farmer dashboard (coming soon)
+                    </li>
+                </ul>
+                <a href="#contact" class="bg-secondary text-primary px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-all inline-block">Register as a Farmer</a>
+            </div>
+            <div class="relative" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" alt="Nigerian Farmer in Field" class="rounded-2xl shadow-2xl overflow-hidden object-cover w-full h-[600px]">
+                <div class="absolute -bottom-6 -left-6 bg-bgWarm p-8 rounded-2xl shadow-xl hidden md:block">
+                    <span class="text-secondary text-4xl block font-bold">120K+</span>
+                    <span class="text-sm uppercase tracking-widest font-bold opacity-70">Hectares Covered</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: For Investors -->
+    <section id="investors" class="py-24 bg-[#FAFAF7]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1 relative" data-aos="fade-right">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800" alt="Investor Analysis" class="rounded-2xl shadow-2xl overflow-hidden object-cover w-full h-[600px]">
+                <div class="absolute -top-6 -right-6 bg-primary p-8 rounded-2xl shadow-xl text-white hidden md:block">
+                    <span class="text-secondary text-4xl block font-bold">₦2M+</span>
+                    <span class="text-sm uppercase tracking-widest font-bold opacity-80">Avg. Investment</span>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2" data-aos="fade-left">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Your Capital Can Feed a Nation</h2>
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                    Nigerian agriculture is one of the highest-potential investment sectors in Africa. Gace Enterprise connects accredited investors with vetted, high-impact agricultural projects — delivering returns and real-world change.
+                </p>
+                
+                <div class="space-y-6 mb-10">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-secondary flex items-start space-x-4">
+                        <span class="text-3xl">🔒</span>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Verified Projects</h4>
+                            <p class="text-gray-500">All farm investment opportunities are vetted and monitored by Gace experts.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-secondary flex items-start space-x-4">
+                        <span class="text-3xl">📊</span>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Transparent Returns</h4>
+                            <p class="text-gray-500">Clear terms, regular performance reports, and no hidden management fees.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-secondary flex items-start space-x-4">
+                        <span class="text-3xl">🌍</span>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Social Impact</h4>
+                            <p class="text-gray-500">Every naira invested directly funds a Nigerian farming family and food security.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#contact" class="bg-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-all inline-block">Explore Investment Opportunities</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Testimonials -->
+    <section id="testimonials" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-primary mb-16" data-aos="fade-up">Voices From the Field</h2>
+            
+            <div class="swiper swiper-container pb-12" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="bg-bgWarm p-12 rounded-3xl text-center max-w-4xl mx-auto border border-gray-100">
+                            <div class="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">AM</div>
+                            <h4 class="text-xl font-bold">Aminu Musa</h4>
+                            <p class="text-secondary font-semibold mb-4">Kebbi State — Rice Farmer</p>
+                            <div class="flex justify-center text-yellow-400 mb-6 space-x-1">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <p class="text-2xl italic text-gray-700 leading-relaxed">
+                                "Before Gace, I farmed the same way my father did. Now I use improved seed varieties and got a loan to buy a small irrigation pump. My yield doubled this season."
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="bg-bgWarm p-12 rounded-3xl text-center max-w-4xl mx-auto border border-gray-100">
+                            <div class="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">FC</div>
+                            <h4 class="text-xl font-bold">Fatima Chukwu</h4>
+                            <p class="text-secondary font-semibold mb-4">Benue State — Cassava Farmer</p>
+                            <div class="flex justify-center text-yellow-400 mb-6 space-x-1">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <p class="text-2xl italic text-gray-700 leading-relaxed">
+                                "The training on post-harvest handling alone saved me from losing 30% of my cassava. And they helped me connect to a buyer in Abuja who pays fair prices."
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="bg-bgWarm p-12 rounded-3xl text-center max-w-4xl mx-auto border border-gray-100">
+                            <div class="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">OA</div>
+                            <h4 class="text-xl font-bold">Ola Adeyemi</h4>
+                            <p class="text-secondary font-semibold mb-4">Ogun State — Investor</p>
+                            <div class="flex justify-center text-yellow-400 mb-6 space-x-1">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <p class="text-2xl italic text-gray-700 leading-relaxed">
+                                "I invested ₦2 million through Gace's investor platform. The reporting was transparent, returns came as promised, and I could see exactly which farmers my money supported."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: CTA Banner -->
+    <section class="py-20 bg-secondary">
+        <div class="max-w-5xl mx-auto px-6 text-center" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-primary mb-6">Ready to Transform Nigerian Agriculture?</h2>
+            <p class="text-xl text-primary/80 mb-10 max-w-2xl mx-auto font-medium">Join thousands of farmers and investors already building a food-secure Nigeria with Gace Enterprises Limited.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contact" class="bg-primary text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-black transition-all w-full sm:w-auto">I'm a Farmer</a>
+                <a href="#contact" class="border-2 border-primary text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-primary hover:text-white transition-all w-full sm:w-auto">I'm an Investor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl md:text-5xl font-bold text-primary mb-8">Get In Touch</h2>
+                    <p class="text-lg text-gray-600 mb-10">Have questions about joining as a farmer, investing, or partnering with us? Our team is ready to support you.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 bg-bgWarm rounded-xl flex items-center justify-center text-primary text-2xl flex-shrink-0">📍</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Address</h4>
+                                <p class="text-gray-500">Gace Enterprises Limited, Abuja, FCT, Nigeria</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 bg-bgWarm rounded-xl flex items-center justify-center text-primary text-2xl flex-shrink-0">📞</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Phone</h4>
+                                <p class="text-gray-500">+234 800 GACE 001</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 bg-bgWarm rounded-xl flex items-center justify-center text-primary text-2xl flex-shrink-0">✉️</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Email</h4>
+                                <p class="text-gray-500">hello@gaceenterprise.com.ng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="mt-12 flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-bgWarm rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="#" class="w-12 h-12 bg-bgWarm rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                        <a href="#" class="w-12 h-12 bg-bgWarm rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                        <a href="#" class="w-12 h-12 bg-bgWarm rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-bgWarm p-12 rounded-3xl shadow-sm" data-aos="fade-left">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Full Name</label>
+                                <input type="text" required class="w-full px-6 py-4 rounded-xl border border-gray-200 outline-none focus:border-primary transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Email Address</label>
+                                <input type="email" required class="w-full px-6 py-4 rounded-xl border border-gray-200 outline-none focus:border-primary transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">I am a:</label>
+                            <select required class="w-full px-6 py-4 rounded-xl border border-gray-200 outline-none focus:border-primary transition-all appearance-none cursor-pointer">
+                                <option value="">Select option</option>
+                                <option value="farmer">Farmer</option>
+                                <option value="investor">Investor</option>
+                                <option value="partner">Partner</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Message</label>
+                            <textarea rows="5" required class="w-full px-6 py-4 rounded-xl border border-gray-200 outline-none focus:border-primary transition-all"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-secondary text-primary font-bold py-5 rounded-xl hover:brightness-110 transition-all text-xl">Send Message</button>
+                    </form>
+                    <div id="form-success" class="hidden mt-6 bg-green-100 text-green-700 p-6 rounded-xl text-center font-bold">
+                        Message sent successfully! We will get back to you soon.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 11: Footer -->
+    <footer class="bg-[#1A1A1A] text-white pt-24 pb-12 border-t-8 border-secondary">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+            <!-- Col 1 -->
+            <div>
+                <a href="#" class="flex items-center space-x-3 mb-6 group">
+                    <div class="w-10 h-10 border-2 border-white flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-6 h-6 fill-white"><path d="M68.5 28.5C65.3 22.8 58.6 19.3 51 19.3C37.2 19.3 26 30.5 26 44.3C26 58.1 37.2 69.3 51 69.3C61.4 69.3 70.3 62.9 74 54V60H84V44H51V54H74C72.5 59.8 67.2 64.3 61 64.3C52.7 64.3 46 57.6 46 49.3C46 41 52.7 34.3 61 34.3C66 34.3 70.4 36.6 73.2 40.3L81.5 32C78.4 28.1 73.8 25.3 68.5 24V28.5Z"/></svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold tracking-tight text-white">GACE</span>
+                        <span class="text-[8px] uppercase tracking-wider text-secondary font-bold">Enterprises Limited</span>
+                    </div>
+                </a>
+                <p class="text-gray-400 leading-relaxed mb-8">
+                    Growing Nigeria, one farmer at a time. We bridge the gap between traditional methods and modern agricultural success.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded">SEC Compliant</span>
+                    <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded">CBN Partner</span>
+                    <span class="text-xs font-bold px-2 py-1 bg-white/10 rounded">CAC Registered</span>
+                </div>
+            </div>
+            <!-- Col 2 -->
+            <div>
+                <h4 class="text-xl font-bold mb-8 relative inline-block">
+                    Quick Links
+                    <span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-secondary"></span>
+                </h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="#home" class="hover:text-secondary transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-secondary transition-colors">About Us</a></li>
+                    <li><a href="#services" class="hover:text-secondary transition-colors">Services</a></li>
+                    <li><a href="#farmers" class="hover:text-secondary transition-colors">For Farmers</a></li>
+                    <li><a href="#investors" class="hover:text-secondary transition-colors">For Investors</a></li>
+                    <li><a href="#contact" class="hover:text-secondary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Col 3 -->
+            <div>
+                <h4 class="text-xl font-bold mb-8 relative inline-block">
+                    Services
+                    <span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-secondary"></span>
+                </h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="#" class="hover:text-secondary transition-colors">AgriKnowledge Hub</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">FarmFinance Access</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Investor Connect</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Market Linkage</a></li>
+                </ul>
+            </div>
+            <!-- Col 4 -->
+            <div>
+                <h4 class="text-xl font-bold mb-8 relative inline-block">
+                    Newsletter
+                    <span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-secondary"></span>
+                </h4>
+                <p class="text-gray-400 mb-6">Stay updated on our impact and new opportunities.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Email Address" class="bg-white/10 border border-white/20 px-4 py-3 rounded-l-xl w-full outline-none focus:border-secondary">
+                    <button class="bg-secondary text-primary px-6 py-3 rounded-r-xl font-bold hover:brightness-110">Join</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-12 border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <p>© 2025 Gace Enterprises Limited. All rights reserved. | Registered in Nigeria</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Init Swiper
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+            }, 1200);
+        });
+
+        // Navbar Scroll Effect
+        const header = document.getElementById('main-header');
+        const backToTop = document.getElementById('back-to-top');
+        const scrollProgress = document.getElementById('scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            // Header
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to top
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Progress bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + "%";
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuLinks = document.querySelectorAll('.click-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('svg');
+            if (mobileMenu.classList.contains('active')) {
+                icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+            } else {
+                icon.innerHTML = '<line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line>';
+            }
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('svg');
+                icon.innerHTML = '<line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line>';
+            });
+        });
+
+        // CountUp Stats
+        const stats = [
+            { id: 'stat1', target: 2400 },
+            { id: 'stat2', target: 180 },
+            { id: 'stat3', target: 34 },
+            { id: 'stat4', target: 92 }
+        ];
+
+        let statsStarted = false;
+        function animateStats() {
+            if (statsStarted) return;
+            const impactSection = document.getElementById('impact');
+            const rect = impactSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                statsStarted = true;
+                stats.forEach(stat => {
+                    const counterInstance = new countUp.CountUp(stat.id, stat.target, {
+                        duration: 3,
+                        suffix: stat.id === 'stat3' ? '' : (stat.id === 'stat4' ? '' : '')
+                    });
+                    if (!counterInstance.error) {
+                        counterInstance.start();
+                    }
+                });
+            }
+        }
+
+        window.addEventListener('scroll', animateStats);
+
+        // Back to top click
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Contact Form
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate form submission
+            contactForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // Revert after 5s for demo
+            setTimeout(() => {
+                contactForm.reset();
+                contactForm.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
